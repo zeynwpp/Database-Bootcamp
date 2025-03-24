@@ -37,5 +37,13 @@ order by 2
 
 --6. JOIN ve Aggregate:
 -- Çalışan başına düşen sipariş sayısını gösteren bir liste çıkarınız.
+
 --7. Tarih Filtreleme:
 --1997 yılında verilen siparişleri listeleyin.
+
+--8. CASE Kullanımı:
+--Ürünleri fiyat aralıklarına göre kategorilere ayırarak listeleyin: 020 → Ucuz, 2050 → Orta, 50+ → Pahalı.
+--9. Nested Subquery:
+--En çok sipariş verilen ürünün adını ve sipariş adedini (adet bazında) bulun.
+--10. View Oluşturma:
+--Ürünler ve kategoriler bilgilerini birleştiren bir görünüm (view) oluşturun.
