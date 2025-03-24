@@ -21,12 +21,20 @@ inner join Shippers s on s.ShipperID = o.ShipVia
 --3. Aggregate Fonksiyon:
 --Tüm siparişlerin toplam tutarını bulun. (Order Details tablosundaki Quantity UnitPrice üzerinden
 --hesaplayınız)
-
+select sum(o.UnitPrice) as ToplamTutar
+from dbo.[Order Details] o
 
 --4. Gruplama:
 --Hangi ülkeden kaç müşteri vardır?
+select c.Country
+,count(*)
+from Customers c
+group by c.Country
+order by 2 
+
 --5.Subquery Kullanımı:
 --En pahalı ürünün adını ve fiyatını listeleyiniz.
+
 --6. JOIN ve Aggregate:
 -- Çalışan başına düşen sipariş sayısını gösteren bir liste çıkarınız.
 --7. Tarih Filtreleme:
