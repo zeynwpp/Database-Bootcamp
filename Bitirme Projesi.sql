@@ -43,10 +43,17 @@ from Products
 )
 
 --6. Çalışan başına düşen sipariş sayısını gösteren bir liste çıkarınız.
+select o.EmployeeID
+,count(o.orderID) as SiparisSayisi
+from Orders o
+group by o.EmployeeID
 
 
 
 --7. 1997 yılında verilen siparişleri listeleyin.
+select *
+from Orders o
+where year(o.OrderDate) = 1997 
 
 --8. Ürünleri fiyat aralıklarına göre kategorilere ayırarak listeleyin: 020 → Ucuz, 2050 → Orta, 50+ → Pahalı.
 
