@@ -34,15 +34,22 @@ order by 2
 
 --5.Subquery Kullanımı:
 --En pahalı ürünün adını ve fiyatını listeleyiniz.
+select p.ProductName
+,p.UnitPrice
+from Products p
+where p.UnitPrice = (
+select max(unitprice)
+from Products
+)
 
---6. JOIN ve Aggregate:
--- Çalışan başına düşen sipariş sayısını gösteren bir liste çıkarınız.
+--6. Çalışan başına düşen sipariş sayısını gösteren bir liste çıkarınız.
 
---7. Tarih Filtreleme:
---1997 yılında verilen siparişleri listeleyin.
 
---8. CASE Kullanımı:
---Ürünleri fiyat aralıklarına göre kategorilere ayırarak listeleyin: 020 → Ucuz, 2050 → Orta, 50+ → Pahalı.
+
+--7. 1997 yılında verilen siparişleri listeleyin.
+
+--8. Ürünleri fiyat aralıklarına göre kategorilere ayırarak listeleyin: 020 → Ucuz, 2050 → Orta, 50+ → Pahalı.
+
 --9. Nested Subquery:
 --En çok sipariş verilen ürünün adını ve sipariş adedini (adet bazında) bulun.
 --10. View Oluşturma:
