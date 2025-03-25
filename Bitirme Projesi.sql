@@ -186,3 +186,4 @@ inner join [Order Details] od on od.OrderID = o.OrderID
 group by o.OrderID
 order by 2 desc
 
+--20. Her kategoriye göre ortalama ürün fiyatını bulun.
