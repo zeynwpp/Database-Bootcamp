@@ -132,10 +132,57 @@ select *
  left join Suppliers s on s.SupplierID = p.SupplierID
 
 --14. Fiyat Ortalamasının Üzerindeki Ürünler: Fiyatı ortalama fiyatın üzerinde olan ürünleri listeleyin.
-
+select *
+from Products pp
+where pp.UnitPrice > (
+select avg(p.UnitPrice)
+from Products p
+)
 
 --15. En Çok Ürün Satan Çalışan: Sipariş detaylarına göre en çok ürün satan çalışan kimdir?
+with ToplamUrunSatis as(
+select os.EmployeeID
+,sum(o.Quantity) as ToplamUrun
+from [Order Details] o
+inner join Orders os on os.OrderID = o.OrderID
+group by os.EmployeeID)
+
+select *
+from ToplamUrunSatis t
+where t.ToplamUrun = (select max(ToplamUrun) from ToplamUrunSatis)
 
 --16.Stok miktarı 10’un altında olan ürünleri listeleyiniz
+select *
+from Products p
+where p.UnitsInStock < 10
+
 --17.Her müşteri şirketinin yaptığı sipariş sayısını ve toplam harcamasını bulun.
+with cost_order_customer as (select c.CompanyName,
+        o.OrderID
+		,od.unitprice * od.quantity as cost
+from Customers c
+inner join Orders o on o.CustomerID = c.CustomerID
+inner join [Order Details] od on od.OrderID = o.OrderID)
+
+select cs.CompanyName
+,count(cs.OrderID) as siparis_sayisi
+,sum(cs.cost) as toplam_harcama
+from cost_order_customer cs
+group by cs.CompanyName
+order by 2, 3
+
 --18.Hangi ülkede en fazla müşteri var?
+select top 1 c.Country
+,count(c.CustomerID) as musteri_sayisi
+from Customers c
+group by c.Country
+order by 2 desc
+
+--19.Siparişlerde kaç farklı ürün olduğu bilgisini listeleyin.
+select o.OrderID
+,count(distinct od.ProductID) as kac_farkli_urun
+from Orders o
+inner join [Order Details] od on od.OrderID = o.OrderID
+group by o.OrderID
+order by 2 desc
+
