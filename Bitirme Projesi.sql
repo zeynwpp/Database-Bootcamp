@@ -77,8 +77,35 @@ where siparis_adet = (select MAX(siparis_adet) from ProductOrders)
 
 --10. View Oluşturma:
 --Ürünler ve kategoriler bilgilerini birleştiren bir görünüm (view) oluşturun.
+create view vw_ProductsWithCategories as
+
+select p.ProductName,
+ p.ProductID,
+    p.ProductName,
+    p.QuantityPerUnit,
+    p.UnitPrice,
+    p.UnitsInStock,
+    c.CategoryID,
+    c.CategoryName,
+    c.Description as CategoryDescription
+from 
+inner join Categories c on p.CategoryID = c.CategoryID
+
+select *
+from vw_ProductsWithCategories
+
 
 --11. Trigger:Ürün silindiğinde log tablosuna kayıt yapan bir trigger yazınız.
+
+
 --12. Stored Procedure: Belirli bir ülkeye ait müşterileri listeleyen bir stored procedure yazınız.
+
+
 --13. Left Join Kullanımı: Tüm ürünlerin tedarikçileriyle (suppliers) birlikte listesini yapın. Tedarikçisi olmayan ürünler de listelensin.
+
+
+--14. Fiyat Ortalamasının Üzerindeki Ürünler: Fiyatı ortalama fiyatın üzerinde olan ürünleri listeleyin.
+
+
+--15. En Çok Ürün Satan Çalışan: Sipariş detaylarına göre en çok ürün satan çalışan kimdir?
 
