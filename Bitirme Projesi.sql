@@ -56,8 +56,29 @@ from Orders o
 where year(o.OrderDate) = 1997 
 
 --8. Ürünleri fiyat aralıklarına göre kategorilere ayırarak listeleyin: 020 → Ucuz, 2050 → Orta, 50+ → Pahalı.
+select p.productID,
+case when p.UnitPrice <= 20 then 'Ucuz'
+when p.UnitPrice <= 50 then 'Orta'
+when p.UnitPrice > 50 then 'Pahalı'
+end as Kategori
+from Products p
 
 --9. Nested Subquery:
 --En çok sipariş verilen ürünün adını ve sipariş adedini (adet bazında) bulun.
+with ProductOrders AS (
+    select p.ProductName, COUNT(o.OrderID) as siparis_adet
+    from dbo.[Order Details] o
+    inner join Products p on o.ProductID = p.ProductID
+    group by p.ProductName
+)
+select ProductName, siparis_adet
+from ProductOrders
+where siparis_adet = (select MAX(siparis_adet) from ProductOrders)
+
 --10. View Oluşturma:
 --Ürünler ve kategoriler bilgilerini birleştiren bir görünüm (view) oluşturun.
+
+--11. Trigger:Ürün silindiğinde log tablosuna kayıt yapan bir trigger yazınız.
+--12. Stored Procedure: Belirli bir ülkeye ait müşterileri listeleyen bir stored procedure yazınız.
+--13. Left Join Kullanımı: Tüm ürünlerin tedarikçileriyle (suppliers) birlikte listesini yapın. Tedarikçisi olmayan ürünler de listelensin.
+
