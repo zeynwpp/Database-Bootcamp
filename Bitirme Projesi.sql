@@ -96,13 +96,40 @@ from vw_ProductsWithCategories
 
 
 --11. Trigger:Ürün silindiğinde log tablosuna kayıt yapan bir trigger yazınız.
+create table ProductLog(
+	logID int identity(1,1) primary key,
+	ProductID int,
+	ProductName nvarchar(255),
+	DeletedAt DATETIME default GETDATE(),
+    DeletedBy NVARCHAR(255)
+	)
 
+create trigger trg_ProductDeleteLog
+on Products
+after delete
+as
+begin
+    insert into ProductLog (ProductID, ProductName, DeletedAt, DeletedBy)
+    select d.ProductID, d.ProductName, GETDATE(), SUSER_NAME()
+    from deleted d;
+end;
 
 --12. Stored Procedure: Belirli bir ülkeye ait müşterileri listeleyen bir stored procedure yazınız.
+create procedure pro1 
+@which_country nvarchar(30)
+as
+select *
+from Customers c
+where c.Country = @which_country
+go
+
+exec pro1 @which_country = 'Germany'
 
 
 --13. Left Join Kullanımı: Tüm ürünlerin tedarikçileriyle (suppliers) birlikte listesini yapın. Tedarikçisi olmayan ürünler de listelensin.
-
+select *
+ from Products p
+ left join Suppliers s on s.SupplierID = p.SupplierID
 
 --14. Fiyat Ortalamasının Üzerindeki Ürünler: Fiyatı ortalama fiyatın üzerinde olan ürünleri listeleyin.
 
