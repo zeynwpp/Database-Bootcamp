@@ -136,3 +136,6 @@ select *
 
 --15. En Çok Ürün Satan Çalışan: Sipariş detaylarına göre en çok ürün satan çalışan kimdir?
 
+--16.Stok miktarı 10’un altında olan ürünleri listeleyiniz
+--17.Her müşteri şirketinin yaptığı sipariş sayısını ve toplam harcamasını bulun.
+--18.Hangi ülkede en fazla müşteri var?
