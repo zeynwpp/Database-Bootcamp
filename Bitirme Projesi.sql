@@ -194,11 +194,26 @@ inner join Categories c  on c.CategoryID = p.CategoryID
 group by c.CategoryID
 
 --21.Siparişleri ay ay gruplayarak kaç sipariş olduğunu listeleyin.
+select month(o.OrderDate) as Month_
+,count(o.OrderID) as count_of_order
+from Orders o
+group by month(o.OrderDate)
+order by 1
+
 
 --22.Her çalışanın ilgilendiği müşteri sayısını listeleyin.
+select o.EmployeeID
+,count(o.CustomerID) as ilgilenilen_müs_Sayısı
+from Orders o
+group by o.EmployeeID
+order by 2
 
 --23.Hiç siparişi olmayan müşterileri listeleyin.
 
+
 --24.Siparişlerin Nakliye (Freight) Maliyeti Analizi: Nakliye maliyetine göre en pahalı 5 siparişi listeleyin.
+SELECT TOP 5 OrderID, CustomerID, OrderDate, Freight
+FROM Orders
+ORDER BY Freight DESC
 
 
