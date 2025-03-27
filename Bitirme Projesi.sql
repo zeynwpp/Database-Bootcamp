@@ -187,3 +187,18 @@ group by o.OrderID
 order by 2 desc
 
 --20. Her kategoriye göre ortalama ürün fiyatını bulun.
+select c.CategoryID
+,avg(p.UnitPrice) as ort_fiyat
+from Products p
+inner join Categories c  on c.CategoryID = p.CategoryID
+group by c.CategoryID
+
+--21.Siparişleri ay ay gruplayarak kaç sipariş olduğunu listeleyin.
+
+--22.Her çalışanın ilgilendiği müşteri sayısını listeleyin.
+
+--23.Hiç siparişi olmayan müşterileri listeleyin.
+
+--24.Siparişlerin Nakliye (Freight) Maliyeti Analizi: Nakliye maliyetine göre en pahalı 5 siparişi listeleyin.
+
+
