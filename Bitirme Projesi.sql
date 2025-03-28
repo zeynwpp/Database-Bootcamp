@@ -209,7 +209,10 @@ group by o.EmployeeID
 order by 2
 
 --23.Hiç siparişi olmayan müşterileri listeleyin.
-
+select c.CustomerID
+from Orders o
+full outer join customers c on c.cutomerID = o.customerID
+where o.OerderID is null
 
 --24.Siparişlerin Nakliye (Freight) Maliyeti Analizi: Nakliye maliyetine göre en pahalı 5 siparişi listeleyin.
 SELECT TOP 5 OrderID, CustomerID, OrderDate, Freight
